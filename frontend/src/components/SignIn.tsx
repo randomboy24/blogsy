@@ -1,11 +1,20 @@
 "use client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "./Container";
 import { BlogsyLogo } from "./BlogsyLogo";
 
+type userType = {
+  name: string;
+  password: string;
+};
+
 export default function SignIn() {
+  const [userCred, setUserCred] = useState<userType>({
+    name: "",
+    password: "",
+  });
   return (
     <Container className=" ">
       <div className="grid grid-cols-2 h-[90%]">
@@ -15,7 +24,7 @@ export default function SignIn() {
             <BlogsyLogo height={100} /> {/* Slightly larger logo */}
           </div>
           <div className="font-serif text-neutral-500 text-3xl">
-            A place to read, write, and deepen your understanding
+            A place to read, write, and deepen your understandinguserCred
           </div>
         </div>
         {/* right side */}
@@ -26,6 +35,14 @@ export default function SignIn() {
                 type="text"
                 placeholder="Username"
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                onChange={(e) => {
+                  setUserCred((prevUserCred: userType) => {
+                    return {
+                      ...prevUserCred,
+                      name: e.target.value,
+                    };
+                  });
+                }}
               />
             </div>
             <div>
@@ -33,12 +50,34 @@ export default function SignIn() {
                 type="password"
                 placeholder="Password"
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                onChange={(e) => {
+                  setUserCred((prevUserCred: userType) => {
+                    return {
+                      ...prevUserCred,
+                      password: e.target.value,
+                    };
+                  });
+                }}
               />
             </div>
             <button
               className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition cursor-pointer text-lg font-medium"
               onClick={() => {
-                redirect("/");
+                fetch("http://localhost/api/signin", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    ...userCred,
+                  }),
+                  credentials: "include",
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    console.log(JSON.stringify(data));
+                    redirect("/");
+                  });
               }}
             >
               Log in

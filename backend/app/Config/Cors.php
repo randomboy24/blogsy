@@ -34,7 +34,8 @@ class Cors extends BaseConfig
          *   - ['http://localhost:8080']
          *   - ['https://www.example.com']
          */
-        'allowedOrigins' => [],
+        'allowedOrigins' => ['http://localhost:3000'], // <-- ADD YOUR FRONTEND ORIGIN HERE
+                                                       // For multiple, use: ['http://localhost:3000', 'https://your-frontend.com']
 
         /**
          * Origin regex patterns for the `Access-Control-Allow-Origin` header.
@@ -57,8 +58,8 @@ class Cors extends BaseConfig
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
          */
-        'supportsCredentials' => false,
-
+        'supportsCredentials' => true, // <-- Set to true if your Next.js app sends cookies/auth headers
+        
         /**
          * Set headers to allow.
          *
@@ -68,7 +69,7 @@ class Cors extends BaseConfig
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
          */
-        'allowedHeaders' => [],
+        'allowedHeaders' => ['Content-Type', 'X-Requested-With', 'Authorization'], // <-- ADD COMMON HEADERS HERE
 
         /**
          * Set headers to expose.
@@ -93,13 +94,13 @@ class Cors extends BaseConfig
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods
          */
-        'allowedMethods' => [],
+        'allowedMethods' => ['GET', 'POST', 'PUT', 'DELETE'], // <-- ADD ALL METHODS YOUR API USES
 
         /**
          * Set how many seconds the results of a preflight request can be cached.
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age
          */
-        'maxAge' => 7200,
+        'maxAge' => 7200, // 2 hours
     ];
 }

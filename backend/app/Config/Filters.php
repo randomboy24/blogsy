@@ -30,10 +30,10 @@ class Filters extends BaseFilters
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'cors'          => Cors::class,
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'cors'          => \CodeIgniter\Filters\Cors::class,
     ];
 
     /**
@@ -43,7 +43,7 @@ class Filters extends BaseFilters
      * other kinds of filters, and always applied even if a route does not exist.
      *
      * Filters set by default provide framework functionality. If removed,
-     * those functions will no longer work.
+     * those functions will no longer work. 
      *
      * @see https://codeigniter.com/user_guide/incoming/filters.html#provided-filters
      *
@@ -106,5 +106,10 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        'cors' => [
+            'before' => ['api/*'],
+            'after' => ['api/*']
+        ]
+    ];
 }
