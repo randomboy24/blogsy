@@ -38,3 +38,11 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     // $routes->delete('products/(:num)', 'Product::delete/$1');
 
 });
+
+
+$routes->group('api',['filter' => 'jwt'], static function (RouteCollection $routes): void {
+    $routes->options('(:any)', static function () {
+        return service('response')->setStatusCode(204)->setBody('');
+    });
+    $routes->get('blogs','BlogController::test');
+});

@@ -34,6 +34,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'cors'          => \CodeIgniter\Filters\Cors::class,
+        'jwt'           => \App\Filters\JwtAuth::class
     ];
 
     /**

@@ -33,6 +33,7 @@ export default function SignIn() {
             <div>
               <input
                 type="text"
+                required
                 placeholder="Username"
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                 onChange={(e) => {
@@ -48,6 +49,7 @@ export default function SignIn() {
             <div>
               <input
                 type="password"
+                required
                 placeholder="Password"
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
                 onChange={(e) => {

@@ -78,7 +78,7 @@ class Auth extends Controller
             return $this->failValidationErrors('Invalid JSON input or empty request body.', 400);
         }
         $name = $json['name'] ?? null;
-        $password = $json['name'] ?? null;
+        $password = $json['password'] ?? null;
 
         $builder = $this->db->table("users");
 
