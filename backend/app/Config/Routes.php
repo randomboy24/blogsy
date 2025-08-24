@@ -44,5 +44,6 @@ $routes->group('api',['filter' => 'jwt'], static function (RouteCollection $rout
     $routes->options('(:any)', static function () {
         return service('response')->setStatusCode(204)->setBody('');
     });
-    $routes->get('blogs','BlogController::test');
+    $routes->post('blog','BlogController::setBlog');
+    $routes->get('blogs','BlogController::getBlogs');
 });

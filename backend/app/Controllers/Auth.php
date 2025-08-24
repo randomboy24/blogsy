@@ -16,7 +16,7 @@ class Auth extends Controller
     use ResponseTrait;
     
 
-    private $secret = "some secret key";  //
+    private $secret = "some secret key";  //    
     
     protected $format = 'json';
     protected $db;
