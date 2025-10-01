@@ -18,7 +18,7 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
 
     // 1. Handle CORS preflight OPTIONS requests for ALL paths within the 'api' group.
     // The 'cors' filter (applied to the group) will add the necessary headers.
-    // The closure itself simply returns a 204 No Content response, which is standard for preflights.
+    // The closure itself simply returns a 204 No Content   response, which is standard for preflights.
     $routes->options('(:any)', static function () {
         return service('response')->setStatusCode(204)->setBody('');
     });
@@ -28,6 +28,18 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     // because they are within this filtered group.
     $routes->post('signup', 'Auth::signup');
     $routes->post('signin', 'Auth::signin');
+    $routes->get('send', 'Auth::test');
+
+    $routes->get('categories','AdminController::getCategories');
+    $routes->post('category','AdminController::addCategory');
+    $routes->delete('category/(:segment)', 'AdminController::deleteCategory/$1');
+    $routes->post('like','BlogController::likeblog');
+    $routes->get('blog/(:segment)/likes', 'BlogController::getBlogLikes/$1');
+    
+    $routes->post('unlike','BlogController::unlikeBlog');
+    $routes->get('blog/(:segment)', 'BlogController::getBlog/$1');
+    $routes->get('blogs/search', 'BlogController::searchBlogs');
+    $routes->get('logout', 'Auth::logout');
 
     // If you have other API endpoints (e.g., for users, products, etc.),
     // they would also go inside this same 'api' group.

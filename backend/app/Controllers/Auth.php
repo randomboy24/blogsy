@@ -42,7 +42,7 @@ class Auth extends Controller
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $data = [
             'id' => $uuid,
-            'name' => $name,
+            'name' => $name,    
             'password' => $hashedPassword
         ];
 
@@ -110,22 +110,45 @@ class Auth extends Controller
         }
     }
 
-   public function testDb()
-{
-    try {
-        // Attempt to connect
-        $this->db = \Config\Database::connect();
-        $this->db->initialize();
+//    public function test(){
+//      $email = \Config\Services::email();
 
-        if ($this->db->connID) {
-            echo "✅ Connected! Database: " . $this->db->getDatabase() . "\n";
-            echo "Connection ID: " . $this->db->connID;
-        } else {
-            echo "❌ Connection failed (connID is empty)";
-        }
-    } catch (\Exception $e) {
-        // Catch any exception thrown by the DB connection
-        echo "❌ Exception caught during DB connection: " . $e->getMessage() . "\n";
-    }
-}
+//         // SMTP configuration (without .env)
+//         $config['protocol']  = 'smtp';
+//         $config['SMTPHost']  = 'smtp.gmail.com';
+//         $config['SMTPUser']  = 'rathorjatin70@gmail.com';        // your Gmail
+//         $config['SMTPPass']  = 'frhw elvi caif bwru';          // 16-digit App Password
+//         $config['SMTPPort']  =  465;
+//         $config['SMTPTimeout'] = 60;
+//         $config['mailType']  = 'html'; 
+//         $config['charset']   = 'utf-8';
+//         $config['wordWrap']  = true;
+//         $config['newline']   = "\r\n";
+//         $config['SMTPCrypto'] = 'ssl'; // use "tls" if using port 587
+
+//         $email->initialize($config);
+
+//         // Sender & recipient
+//         $email->setFrom('rathorjatin70@gmail.com', 'jatin');
+//         $email->setTo('jatinthegod212@gmail.com');
+
+//         // Subject & body
+//         $email->setSubject('Test Email from CodeIgniter 4');
+//         $email->setMessage('<h1>Hello!</h1><p>This is a test email using Gmail SMTP in CI4.</p>');
+
+//         // Send email
+//         if ($email->send()) {
+//             echo "✅ Email sent successfully!";
+//         } else {
+//             echo "❌ Email sending failed.<br>";
+//             print_r($email->printDebugger(['headers']));
+//         }
+//     return $this->respond(([
+//         'message' => "testing...."
+//     ]));
+//    }
+
+    public function logout() {
+        set_cookie("token","");
+    } 
 }

@@ -11,4 +11,12 @@ export const signupSchema = z.object({
     .max(20, "Password can't be longer than 20 characters."),
 });
 
+export type BlogCardProps = {
+  id?: string;
+  title: string;
+  content: string;
+  author: string;
+  createdAt: string;
+};
+
 export type userType = z.infer<typeof signupSchema>;

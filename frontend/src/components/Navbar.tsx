@@ -4,8 +4,15 @@ import { Categories } from "./Categories";
 import Link from "next/link";
 import { Notifications } from "./Notifications";
 import { BlogsyLogo } from "./BlogsyLogo";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
+import { Avataar } from "./Avataar";
 
-export function Navbar() {
+export async function Navbar() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  const decoded: any = jwt.decode(token || "");
+
   return (
     <div className="h-16 flex items-center border-b border-neutral-400 px-10 justify-between">
       <div className="flex items-center">
@@ -15,15 +22,15 @@ export function Navbar() {
         <SearchBox />
       </div>
       <div className="flex items-center gap-x-10 text-neutral-500 ">
-        <Categories />
-        <div className="flex gap-x-1 text-neutral-500 hover:text-black hover:cursor-pointer">
-          <NotebookPen strokeWidth={1} />
-          <Link href={"/publish"}>Write</Link>
-        </div>
+        {/* <Categories /> */}
+        <Link href={"/publish"}>
+          <div className="flex gap-x-1 text-neutral-500 hover:text-black hover:cursor-pointer">
+            <NotebookPen strokeWidth={1} />
+            <span>Write</span>
+          </div>
+        </Link>
         <Notifications />
-        <div className="h-10 w-10 rounded-4xl border bg-gray-500 text-white flex items-center justify-center">
-          A
-        </div>
+        <Avataar char={decoded?.name[0]} />
       </div>
     </div>
   );

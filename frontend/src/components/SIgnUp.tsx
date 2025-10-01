@@ -90,13 +90,13 @@ export default function SignUp() {
               } else {
                 console.log(result.data);
               }
-              return;
               fetch("http://localhost/api/signup", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify(userCred),
+                credentials: "include",
               })
                 .then((response) => response.json())
                 .then((data) => {

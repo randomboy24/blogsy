@@ -17,9 +17,9 @@ export default function SignIn() {
   });
   return (
     <Container className=" ">
-      <div className="grid grid-cols-2 h-[90%]">
+      <div className="grid md:grid-cols-2 grid-cols-1 h-[90%]">
         {/* left side */}
-        <div className="flex flex-col justify-center mt-14">
+        <div className="md:flex flex-col justify-center mt-14 md:block hidden">
           <div>
             <BlogsyLogo height={100} /> {/* Slightly larger logo */}
           </div>
